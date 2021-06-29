@@ -1,18 +1,23 @@
-# Adam Blog is a minimal clear theme for Jekyll
 
-![Adam Blog - Imac](https://github.com/artemsheludko/adam-blog/blob/master/assets/img/adam-blog-imac.jpg?raw=true)
+# Leach Chen Blog is a minimal clear theme for Jekyll
+![Leach Chen Blog - Imac](https://leach-chen.github.io/blogdemo/assets/img/adam-blog-imac.jpg)
 
 ## Demo
+[网站出处](https://github.com/leach-chen/blogdemo)
 
-Check the theme in action [Demo](https://artemsheludko.github.io/adam-blog/)
+[网站参考来源](https://github.com/artemsheludko/adam-blog)
+
+[网站搭建教程](https://www.jianshu.com/p/9f71e260925d)
+
+[网站效果预览（点击预览）](https://leach-chen.github.io/blogdemo/)
 
 The main page would look like this:
 
-![Main page preview](https://github.com/artemsheludko/adam-blog/blob/master/assets/img/adam-home-page.jpg?raw=true)
+![Main page preview](https://leach-chen.github.io/blogdemo/other/img/mainpage.png)
 
 The post page would look like this:
 
-![Post page preview](https://github.com/artemsheludko/adam-blog/blob/master/assets/img/adam-post-example.jpg?raw=true)
+![Post page preview](https://leach-chen.github.io/blogdemo/other/img/articlepage.png)
 
 ## Features
 
@@ -27,11 +32,6 @@ The post page would look like this:
 
 Fork the ``master`` branch and delete ``gh-pages`` branch in it. This is important because ``gh-pages`` branch is used here only to host the blog. You should be using the master branch as the source and create a fresh ``gh-pages`` branch.
 
-## License
+### License
 
 GNU General Public License v3.0
-
-## Donate
-
-<p>If you like the themes that I create you can become my sponsor on <a href="https://www.patreon.com/artemsheludko" target="_blank">Patreon</a>.
-<p align="center"><b>Thank you for your support ❤️</b></p>
