@@ -1,46 +1,34 @@
-$(function () {
-  // Cache variables for increased performance on devices with slow CPUs.
-  var flexContainer = $('div.flex-container')
-  var searchBox = $('.search-box')
-  var searchClose = $('.search-icon-close')
-  var searchInput = $('#search-input')
+function toggleMenu() {
+  var nav = document.getElementsByClassName("site-header-nav")[0];
+  if (nav.style.display == "inline-flex") {
+    nav.style.display = "none";
+  } else {
+    nav.style.display = "inline-flex";
+  }
+}
 
-  // Menu Settings
-  $('.menu-icon, .menu-icon-close').click(function (e) {
-    e.preventDefault()
-    e.stopPropagation()
-    flexContainer.toggleClass('active')
-  })
+jQuery(function() {
+  // 回到顶部
+  function toTop () {
+    var $toTop = $(".gotop");
 
-  // Click outside of menu to close it
-  flexContainer.click(function (e) {
-    if (flexContainer.hasClass('active') && e.target.tagName !== 'A') {
-      flexContainer.removeClass('active')
-    }
-  })
-
-  // Press Escape key to close menu
-  $(window).keydown(function (e) {
-    if (e.key === 'Escape') {
-      if (flexContainer.hasClass('active')) {
-        flexContainer.removeClass('active')
-      } else if (searchBox.hasClass('search-active')) {
-        searchBox.removeClass('search-active')
+    $(window).on("scroll", function () {
+      if ($(window).scrollTop() >= $(window).height()) {
+        $toTop.css("display", "block").fadeIn();
+      } else {
+        $toTop.fadeOut();
       }
-    }
-  })
+    });
 
-  // Search Settings
-  $('.search-icon').click(function (e) {
-    e.preventDefault()
-    searchBox.toggleClass('search-active')
-    searchInput.focus()
+    $toTop.on("click", function (evt) {
+      var $obj = $("body,html");
+      $obj.animate({
+        scrollTop: 0
+      }, 240);
 
-    if (searchBox.hasClass('search-active')) {
-      searchClose.click(function (e) {
-    		e.preventDefault()
-    		searchBox.removeClass('search-active')
-    	})
-    }
-  })
-})
+      evt.preventDefault();
+    });
+  }
+
+  toTop();
+});
