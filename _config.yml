@@ -12,7 +12,7 @@ keywords: onefeng
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
-repository: "https://github.com/onefeng/onefeng.github.io.git"
+repository: onefeng/onefeng.github.io.git
 # 对 css 和 js 资源的 cdn 加速配置
 cdn:
     jsdelivr:
