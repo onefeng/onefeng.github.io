@@ -1,18 +1,17 @@
 # ---------------- #
 #   Main Configs   #
 # ---------------- #
-#baseurl: ""
-url: "https://onefeng.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-github_repo: "https://github.com/onefeng/onefeng.github.io.git"
+baseurl:
+url: https://onefeng.github.io
 date_format: "ordinal"
-title: 重楼
-subtitle: "风的世界"
-description: "onefeng的个人博可"
-keywords: onefeng
+title: 码志
+subtitle: "公众号：闷骚的程序员"
+description: "马壮的个人博客，公众号：闷骚的程序员"
+keywords: 码志, Zhuang Ma, mzlogin, mazhuang, 闷骚的程序员
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
-repository: onefeng/onefeng.github.io.git
+repository: onefeng/onefeng.github.io
 # 对 css 和 js 资源的 cdn 加速配置
 cdn:
     jsdelivr:
@@ -50,12 +49,12 @@ highlight_theme: github
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: onefeng
+author: Zhuang Ma
 organization: 
 organization_url: 
-github_username: onefeng
-location: ChengDu, China
-email: 15198086902@163.com
+github_username: mzlogin
+location: Wuhan, China
+email: chumpma@gmail.com
 
 # ---------------- #
 #    Navigation    #
