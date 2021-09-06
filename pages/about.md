@@ -1,9 +1,9 @@
 ---
 layout: page
 title: About
-description: 打码改变世界
-keywords: Zhuang Ma, 马壮
-comments: true
+description: 代码江湖
+keywords: onefeng, 一风
+comments: flase
 menu: 关于
 permalink: /about/
 ---
