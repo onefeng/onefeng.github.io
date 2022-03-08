@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: 关于
 description: 代码江湖
 keywords: onefeng, 一风
 comments: flase
@@ -8,11 +8,9 @@ menu: 关于
 permalink: /about/
 ---
 
-我是马壮，码而生，码而立。
+我是晚风/onefeng。
 
-仰慕「优雅编码的艺术」。
-
-坚信熟能生巧，努力改变人生。
+有一定的代码洁癖
 
 ## 联系
 
