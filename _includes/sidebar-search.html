@@ -1,4 +1,3 @@
-
 <h3>搜索</h3>
 <div id="site_search">
     <input style="width:96%" type="text" id="search_box" placeholder="">
@@ -12,7 +11,7 @@
 SimpleJekyllSearch({
     searchInput: document.getElementById('search_box'),
     resultsContainer: document.getElementById('search_results'),
-    json: '{{ assets_base_url }}/assets/search_data.json?v={{ "now" | date: "%s"}}',
+    json: '{{ site.url }}/assets/search_data.json?v={{ "now" | date: "%s"}}',
     searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>',
     noResultsText: '没有搜索到...',
     limit: {{ site.simple_jekyll_search.limit }},
