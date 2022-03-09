@@ -91,9 +91,7 @@ collections:
     output: true
     permalink: /wiki/:path/
 
-# ---------------- #
-#      Comments    #
-# ---------------- #
+
 # 请修改下面这些信息为你自己申请的
 # https://github.com/gitalk/gitalk#install
 gitalk:
