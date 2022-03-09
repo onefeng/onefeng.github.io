@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-03-09T15:13:24+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">onefeng</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">安装ubuntu</title><link href="https://onefeng.github.io/2021/09/29/linux1/" rel="alternate" type="text/html" title="安装ubuntu" /><published>2021-09-29T00:00:00+08:00</published><updated>2021-09-29T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/09/29/linux1</id><content type="html" xml:base="https://onefeng.github.io/2021/09/29/linux1/">&lt;p&gt;本文讲述安装制作ubuntu启动盘以及在机器上安装系统的过程&lt;/p&gt;
+
+&lt;h3 id=&quot;下载文件&quot;&gt;下载文件&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;rufus-3.13.exe&lt;/li&gt;
+  &lt;li&gt;ubuntu-18.04.6-desktop-amd64.iso&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;安装过程&quot;&gt;安装过程&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;制作ubuntu镜像启动盘，制作过程在windows下完成。如下图所示，选择对应的u盘和镜像文件，点击”开始“。&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/posts/linux/img_1.png&quot; alt=&quot;图片1&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;插入u盘在开机时按F2进入bios选项（这里需要根据自己的计算机进入），在”boot“选项中调整第一启动项为”[UEFI:hp …]“,就是我u盘的名称。&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/posts/linux/img_2.jpg&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;选择 ”install ubuntu“，根据界面的安装选择下一步，在分区的时候选择”手动分区”，这里我的硬盘为128G固态+1T机械，分区方案如下。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;硬盘类型&lt;/th&gt;
+      &lt;th&gt;分区类型&lt;/th&gt;
+      &lt;th&gt;分区格式&lt;/th&gt;
+      &lt;th&gt;挂载点&lt;/th&gt;
+      &lt;th&gt;大小&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;固态&lt;/td&gt;
+      &lt;td&gt;主分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/boot&lt;/td&gt;
+      &lt;td&gt;500M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;固态&lt;/td&gt;
+      &lt;td&gt;主分区&lt;/td&gt;
+      &lt;td&gt;efi&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;500M&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;固态&lt;/td&gt;
+      &lt;td&gt;主分区&lt;/td&gt;
+      &lt;td&gt;swap&lt;/td&gt;
+      &lt;td&gt;-&lt;/td&gt;
+      &lt;td&gt;8G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;固态&lt;/td&gt;
+      &lt;td&gt;主分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/&lt;/td&gt;
+      &lt;td&gt;116G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;机械&lt;/td&gt;
+      &lt;td&gt;主分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/home&lt;/td&gt;
+      &lt;td&gt;400G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;机械&lt;/td&gt;
+      &lt;td&gt;主分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/usr&lt;/td&gt;
+      &lt;td&gt;200G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;机械&lt;/td&gt;
+      &lt;td&gt;主分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/var&lt;/td&gt;
+      &lt;td&gt;100G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;机械&lt;/td&gt;
+      &lt;td&gt;主分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/opt&lt;/td&gt;
+      &lt;td&gt;100G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;机械&lt;/td&gt;
+      &lt;td&gt;逻辑分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/srv&lt;/td&gt;
+      &lt;td&gt;50G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;机械&lt;/td&gt;
+      &lt;td&gt;逻辑分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/usr/local&lt;/td&gt;
+      &lt;td&gt;50G&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;机械&lt;/td&gt;
+      &lt;td&gt;逻辑分区&lt;/td&gt;
+      &lt;td&gt;ext4&lt;/td&gt;
+      &lt;td&gt;/tmp&lt;/td&gt;
+      &lt;td&gt;50G&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>onefeng</name></author><category term="linux" /><category term="运维" /><summary type="html">本文讲述安装制作ubuntu启动盘以及在机器上安装系统的过程</summary></entry><entry><title type="html">ubuntu命令行连接wifi</title><link href="https://onefeng.github.io/2021/09/26/linux-job/" rel="alternate" type="text/html" title="ubuntu命令行连接wifi" /><published>2021-09-26T00:00:00+08:00</published><updated>2021-09-26T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/09/26/linux-job</id><content type="html" xml:base="https://onefeng.github.io/2021/09/26/linux-job/">&lt;p&gt;本文讲述在ubuntu环境下用命令行连接wifi的过程&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;查看网络设备列表
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;nmcli dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;开启wifi
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;nmcli r wifi on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;扫描wifi
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;nmcli dev wifi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;连接指定wifi
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;nmcli dev wifi connect &lt;span class=&quot;s2&quot;&gt;&quot;SSID&quot;&lt;/span&gt; password &lt;span class=&quot;s2&quot;&gt;&quot;PASSWORD&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;SSID为wifi的名称，PASSWORD为wifi密码&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>onefeng</name></author><category term="linux" /><category term="运维" /><summary type="html">本文讲述在ubuntu环境下用命令行连接wifi的过程</summary></entry></feed>

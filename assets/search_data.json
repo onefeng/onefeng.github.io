@@ -1,0 +1,92 @@
+
+
+[
+  
+  
+    {
+      "title"    : "页面没有找到",
+      "url"      : "https://onefeng.github.io/404.html",
+      "keywords" : "404"
+    } ,
+  
+  
+  
+    {
+      "title"    : "关于",
+      "url"      : "https://onefeng.github.io/about/",
+      "keywords" : "onefeng, 一风"
+    } ,
+  
+  
+  
+    {
+      "title"    : "归档",
+      "url"      : "https://onefeng.github.io/archives/",
+      "keywords" : "归档"
+    } ,
+  
+  
+  
+    {
+      "title"    : "分类",
+      "url"      : "https://onefeng.github.io/categories/",
+      "keywords" : "分类"
+    } ,
+  
+  
+  
+  
+  
+  
+  
+    {
+      "title"    : "维基",
+      "url"      : "https://onefeng.github.io/wiki/",
+      "keywords" : "维基, Wiki"
+    } ,
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    {
+      "title"    : "ubuntu命令行连接wifi",
+      "category" : "linux",
+      
+      "url"      : "https://onefeng.github.io/2021/09/26/linux-job/",
+      "keywords" : "linux,运维"
+    } ,
+  
+    {
+      "title"    : "安装ubuntu",
+      "category" : "linux",
+      
+      "url"      : "https://onefeng.github.io/2021/09/29/linux1/",
+      "keywords" : "linux,运维"
+    } ,
+  
+    {
+      "title"    : "Git",
+      "category" : "Git",
+      
+      "url"      : "https://onefeng.github.io/wiki/git/",
+      "keywords" : "Git, 版本控制"
+    } ,
+  
+    {
+      "title"    : "GitHub",
+      "category" : "GitHub",
+      
+      "url"      : "https://onefeng.github.io/wiki/github/",
+      "keywords" : "GitHub"
+    } 
+  
+]
+
