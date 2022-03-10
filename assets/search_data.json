@@ -57,6 +57,14 @@
 
   
     {
+      "title"    : "github pages创建博客",
+      "category" : "技术",
+      
+      "url"      : "https://onefeng.github.io/2021/07/10/jekyll/",
+      "keywords" : "jekyll"
+    } ,
+  
+    {
       "title"    : "ubuntu命令行连接wifi",
       "category" : "linux",
       

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-03-10T13:48:33+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">onefeng</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">安装ubuntu</title><link href="https://onefeng.github.io/2021/09/29/linux1/" rel="alternate" type="text/html" title="安装ubuntu" /><published>2021-09-29T00:00:00+08:00</published><updated>2021-09-29T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/09/29/linux1</id><content type="html" xml:base="https://onefeng.github.io/2021/09/29/linux1/">&lt;p&gt;本文讲述安装制作ubuntu启动盘以及在机器上安装系统的过程&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-03-10T14:53:23+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">安装ubuntu</title><link href="https://onefeng.github.io/2021/09/29/linux1/" rel="alternate" type="text/html" title="安装ubuntu" /><published>2021-09-29T00:00:00+08:00</published><updated>2021-09-29T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/09/29/linux1</id><content type="html" xml:base="https://onefeng.github.io/2021/09/29/linux1/">&lt;p&gt;本文讲述安装制作ubuntu启动盘以及在机器上安装系统的过程&lt;/p&gt;
 
 &lt;h3 id=&quot;下载文件&quot;&gt;下载文件&lt;/h3&gt;
 
@@ -134,4 +134,40 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
     &lt;p&gt;SSID为wifi的名称，PASSWORD为wifi密码&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>onefeng</name></author><category term="linux" /><category term="运维" /><summary type="html">本文讲述在ubuntu环境下用命令行连接wifi的过程</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>onefeng</name></author><category term="linux" /><category term="运维" /><summary type="html">本文讲述在ubuntu环境下用命令行连接wifi的过程</summary></entry><entry><title type="html">github pages创建博客</title><link href="https://onefeng.github.io/2021/07/10/jekyll/" rel="alternate" type="text/html" title="github pages创建博客" /><published>2021-07-10T00:00:00+08:00</published><updated>2021-07-10T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/07/10/jekyll</id><content type="html" xml:base="https://onefeng.github.io/2021/07/10/jekyll/">&lt;p&gt;关于使用github pages创建博客的教学&lt;/p&gt;
+
+&lt;h2 id=&quot;步骤&quot;&gt;步骤&lt;/h2&gt;
+
+&lt;h3 id=&quot;创建账号&quot;&gt;创建账号&lt;/h3&gt;
+
+&lt;p&gt;首先在&lt;a href=&quot;https://github.com&quot;&gt;github&lt;/a&gt;官网上注册账号&lt;/p&gt;
+
+&lt;h3 id=&quot;创建仓库&quot;&gt;创建仓库&lt;/h3&gt;
+
+&lt;p&gt;创建账号登录之后&lt;/p&gt;
+
+&lt;p&gt;Pages设置&lt;/p&gt;
+
+&lt;p&gt;创建Secrets&lt;/p&gt;
+
+&lt;p&gt;申请gitalk&lt;/p&gt;
+
+&lt;h3 id=&quot;部署项目&quot;&gt;部署项目&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将我的代码pull下来，&lt;/li&gt;
+  &lt;li&gt;修改_config&lt;/li&gt;
+  &lt;li&gt;并推送到master分支上&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;写文章&quot;&gt;写文章&lt;/h3&gt;
+
+&lt;p&gt;在_post下按规定的格式书写并完成推送
+_wiki下主要是知识点&lt;/p&gt;
+
+&lt;h2 id=&quot;本地调试&quot;&gt;本地调试&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在windows下&lt;/li&gt;
+  &lt;li&gt;linux下&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>onefeng</name></author><category term="技术" /><summary type="html">关于使用github pages创建博客的教学</summary></entry></feed>
