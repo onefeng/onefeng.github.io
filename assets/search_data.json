@@ -77,23 +77,23 @@
       "category" : "cron",
       
       "url"      : "https://onefeng.github.io/wiki/cron/",
-      "keywords" : "cron"
+      "keywords" : "cron相关说明"
     } ,
   
     {
-      "title"    : "Git",
-      "category" : "Git",
+      "title"    : "git",
+      "category" : "git",
       
       "url"      : "https://onefeng.github.io/wiki/git/",
-      "keywords" : "Git, 版本控制"
+      "keywords" : "git, 版本控制"
     } ,
   
     {
-      "title"    : "GitHub",
-      "category" : "GitHub",
+      "title"    : "gitHub",
+      "category" : "gitHub",
       
       "url"      : "https://onefeng.github.io/wiki/github/",
-      "keywords" : "GitHub"
+      "keywords" : "gitHub"
     } 
   
 ]
