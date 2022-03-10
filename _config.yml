@@ -1,17 +1,17 @@
 # ---------------- #
 #   Main Configs   #
 # ---------------- #
-baseurl:
 url: https://onefeng.github.io
 date_format: "ordinal"
-title: onefeng
-subtitle:
+title: 晚风
+subtitle: 既然来了就逛一逛再走哇...
 description: "晚风的个人博客"
 keywords: 程序员，onefeng
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
 repository: onefeng/onefeng.github.io
+
 # 对 css 和 js 资源的 cdn 加速配置
 cdn:
   jsdelivr:
