@@ -1,9 +1,9 @@
 ---
 layout: wiki
-title: Git
-categories: Git
-description: Git 常用操作记录。
-keywords: Git, 版本控制
+title: git
+categories: git
+description: git 常用操作记录。
+keywords: git, 版本控制
 ---
 
 ## 常用命令
