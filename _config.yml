@@ -1,15 +1,15 @@
 # ---------------- #
 #   Main Configs   #
 # ---------------- #
-url: https://onefeng.github.io
+url: https://kolongs.github.io
 date_format: "ordinal"
 title: 晚风
-subtitle: 既然来了就逛一逛再走哇...
-description: "晚风的个人博客"
-keywords: 程序员，onefeng
+subtitle: hello大家好...
+description: "克龙的个人博客"
+keywords: 程序员，kolongs
 timezone: Asia/Shanghai
 encoding: "utf-8"
-repository: onefeng/onefeng.github.io
+repository: kolongs/kolongs.github.io
 
 # 对 css 和 js 资源的 cdn 加速配置
 cdn:
@@ -19,7 +19,7 @@ cdn:
 components:
   # My Popular Repositories
   side_bar_repo:
-    enabled: false
+    enabled: true
     limit: 5
   # 文章字数统计
   word_count:
@@ -36,8 +36,8 @@ compress_html:
 author: onefeng
 organization:
 organization_url:
-github_username: onefeng
-location: Chengdu, China
+github_username: kolongs
+location: MianYang, China
 
 # ---------------- #
 #    Navigation    #
@@ -93,10 +93,10 @@ collections:
 # 请修改下面这些信息为你自己申请的
 # https://github.com/gitalk/gitalk#install
 gitalk:
-  owner: onefeng
-  repo: onefeng.github.io
-  clientID: 32093df0544328cd07f4
-  clientSecret: 293fe7853fd4a12eb266c11cf02b775908525ce3
+  owner: 
+  repo: 
+  clientID: 
+  clientSecret: 
 
 
 # ---------------- #
