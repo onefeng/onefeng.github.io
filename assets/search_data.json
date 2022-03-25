@@ -81,6 +81,14 @@
     } ,
   
     {
+      "title"    : "解决/var/lib/docker/overlay2占用过大",
+      "category" : "docker",
+      
+      "url"      : "https://onefeng.github.io/2022/03/23/docker/",
+      "keywords" : "docker,canal"
+    } ,
+  
+    {
       "title"    : "cron表达式",
       "category" : "cron",
       

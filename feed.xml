@@ -1,4 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-03-10T17:12:47+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">安装ubuntu</title><link href="https://onefeng.github.io/2021/09/29/linux1/" rel="alternate" type="text/html" title="安装ubuntu" /><published>2021-09-29T00:00:00+08:00</published><updated>2021-09-29T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/09/29/linux1</id><content type="html" xml:base="https://onefeng.github.io/2021/09/29/linux1/">&lt;p&gt;本文讲述安装制作ubuntu启动盘以及在机器上安装系统的过程&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-03-25T13:49:39+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">解决/var/lib/docker/overlay2占用过大</title><link href="https://onefeng.github.io/2022/03/23/docker/" rel="alternate" type="text/html" title="解决/var/lib/docker/overlay2占用过大" /><published>2022-03-23T00:00:00+08:00</published><updated>2022-03-23T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/03/23/docker</id><content type="html" xml:base="https://onefeng.github.io/2022/03/23/docker/">&lt;p&gt;解决/var/lib/docker/overlay2占用过大&lt;/p&gt;
+
+&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
+&lt;p&gt;今天在公司的时候终于解决了一直困扰我很久的一个问题。&lt;/p&gt;
+
+&lt;p&gt;问题的背景是我在一台机器上用docker依次部署了canal-server,canal-adapter作为公司同步数据的节点。但是随着时间的推移容器占用的磁盘越来越大了，到现在不得不解决了，直接磁盘满了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/docker/磁盘.png&quot; alt=&quot;图片1&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;解决方案&quot;&gt;解决方案&lt;/h2&gt;
+&lt;p&gt;列举出现这种情况所有可能的原因，然后逐一排除。首先是在/var/docker目录下，因此所有的原因应该与docker增加的文件和日志有关。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;未使用的容器，镜像&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;用分别检查占用空间总共占用不大2G,另外这台机器专门用来做数据同步。其他任何程序和文件都没有安装。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;日志文件&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;由于之前是将canal-server,canal-adapter的日志配置设置为3个文件50M进行日志回滚，因此对日志输出忽略了，但是这是canal服务本生记录并打印的日志。&lt;/p&gt;
+
+&lt;p&gt;实际上我在启动容器的时候docker的日志驱动默认为json-file,日志记录在/var/lib/docker/containers/{containerId}下&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/docker/日志.png&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以看到日志直接有20G~ 删除日志并重启容器后磁盘暂用恢复正常。&lt;/p&gt;
+
+&lt;h2 id=&quot;总结扩展&quot;&gt;总结&amp;amp;扩展&lt;/h2&gt;
+
+&lt;p&gt;通过这次处理的问题，可以得出docker默认的的日志驱动会捕获所有日志，如果希望对日志进行回滚需要在启动时设置参数&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# max-size 最大数值&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# max-file 最大日志数&lt;/span&gt;
+docker docker run &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--log-opt&lt;/span&gt; max-size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10m &lt;span class=&quot;nt&quot;&gt;--log-opt&lt;/span&gt; max-file&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3 redis
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;但是如果不想每次创建容器都加日志参数命令那么修改 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/docker/daemon.json&lt;/code&gt;,并增加&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;log-driver&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;json-file&quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&quot;log-opts&quot;&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;max-size&quot;&lt;/span&gt; :&lt;span class=&quot;s2&quot;&gt;&quot;10m&quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&quot;max-file&quot;&lt;/span&gt;:&lt;span class=&quot;s2&quot;&gt;&quot;3&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;重启docker后生效,已存在的容器则要新建&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart docker
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>onefeng</name></author><category term="docker" /><summary type="html">解决/var/lib/docker/overlay2占用过大</summary></entry><entry><title type="html">安装ubuntu</title><link href="https://onefeng.github.io/2021/09/29/linux1/" rel="alternate" type="text/html" title="安装ubuntu" /><published>2021-09-29T00:00:00+08:00</published><updated>2021-09-29T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/09/29/linux1</id><content type="html" xml:base="https://onefeng.github.io/2021/09/29/linux1/">&lt;p&gt;本文讲述安装制作ubuntu启动盘以及在机器上安装系统的过程&lt;/p&gt;
 
 &lt;h3 id=&quot;下载文件&quot;&gt;下载文件&lt;/h3&gt;
 
