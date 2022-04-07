@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-04-07T09:10:17+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">解决/var/lib/docker/overlay2占用过大</title><link href="https://onefeng.github.io/2022/03/23/docker/" rel="alternate" type="text/html" title="解决/var/lib/docker/overlay2占用过大" /><published>2022-03-23T00:00:00+08:00</published><updated>2022-03-23T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/03/23/docker</id><content type="html" xml:base="https://onefeng.github.io/2022/03/23/docker/">&lt;p&gt;解决/var/lib/docker/overlay2占用过大&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-04-07T09:19:09+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">解决/var/lib/docker/overlay2占用过大</title><link href="https://onefeng.github.io/2022/03/23/docker/" rel="alternate" type="text/html" title="解决/var/lib/docker/overlay2占用过大" /><published>2022-03-23T00:00:00+08:00</published><updated>2022-03-23T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/03/23/docker</id><content type="html" xml:base="https://onefeng.github.io/2022/03/23/docker/">&lt;p&gt;解决/var/lib/docker/overlay2占用过大&lt;/p&gt;
 
 &lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
 &lt;p&gt;今天在公司的时候终于解决了一直困扰我很久的一个问题。&lt;/p&gt;
@@ -11,20 +11,17 @@
 &lt;p&gt;列举出现这种情况所有可能的原因，然后逐一排除。首先是在/var/docker目录下，因此所有的原因应该与docker增加的文件和日志有关。&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;未使用的容器，镜像&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;未使用的容器/镜像&lt;br /&gt;
+用分别检查占用空间总共占用不大2G,另外这台机器专门用来做数据同步。其他任何程序和文件都没有安装。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;日志文件
+由于之前是将canal-server,canal-adapter的日志配置设置为3个文件50M进行日志回滚，因此对日志输出忽略了，但是这是canal服务本生记录并打印的日志。&lt;br /&gt;
+实际上我在启动容器的时候docker的日志驱动默认为json-file,日志记录在/var/lib/docker/containers/{containerId}下
+&lt;img src=&quot;/images/posts/docker/日志.png&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;用分别检查占用空间总共占用不大2G,另外这台机器专门用来做数据同步。其他任何程序和文件都没有安装。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;日志文件&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;由于之前是将canal-server,canal-adapter的日志配置设置为3个文件50M进行日志回滚，因此对日志输出忽略了，但是这是canal服务本生记录并打印的日志。&lt;/p&gt;
-
-&lt;p&gt;实际上我在启动容器的时候docker的日志驱动默认为json-file,日志记录在/var/lib/docker/containers/{containerId}下&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/posts/docker/日志.png&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;可以看到日志直接有20G~ 删除日志并重启容器后磁盘暂用恢复正常。&lt;/p&gt;
 
@@ -199,46 +196,24 @@ docker docker run &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span cla
 
 &lt;ol&gt;
   &lt;li&gt;在https://github.com/onefeng/onefeng.github.io fork项目，应该就可以在你自己的仓库下看到。&lt;/li&gt;
-  &lt;li&gt;点击进入已经fork的项目点击Settings-&amp;gt;General修改项目名称为你自己的命名。只需要将xxxxx替换。&lt;/li&gt;
+  &lt;li&gt;点击进入已经fork的项目点击Settings-&amp;gt;General修改项目名称为你自己的命名。只需要将xxxxx替换。
+&lt;img src=&quot;/images/blog/img.png&quot; alt=&quot;图片1&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;项目中点击Settings-&amp;gt;Pages选择页面启动运行的分支为master
+&lt;img src=&quot;/images/blog/img_1.png&quot; alt=&quot;图片2&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;生成key,在全局设置中选 Settings-&amp;gt;Developer settings-&amp;gt;Person access tokens-&amp;gt;Generate new token 勾选 public_repo,在该页面最后，点击Generate token，复制已经生成的key
+&lt;img src=&quot;/images/blog/img_2.png&quot; alt=&quot;图片3&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;进入博客项目中，选择Settings-&amp;gt;Secret-&amp;gt;Actions-&amp;gt;New repository secret,将上一步生成的key复制到value，最后点击Add secret
+&lt;img src=&quot;/images/blog/img_3.png&quot; alt=&quot;图片4&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;添加gitalk.在全局设置中Settings-&amp;gt;Developer settings-&amp;gt;OAuth Apps.按格式填写后Register application.然后记下生成的Client ID和Client secrets
+&lt;img src=&quot;/images/blog/img_4.png&quot; alt=&quot;图片4&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;修改_config.yml配置，基本的都配置好了主要是改一下项目基本配置和gitalk配置，另外删除_post下除template.md的文件和_wiki,_images下的所有文件 &lt;br /&gt;
+修改完成并推送或合并到master上就可以看到了。&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/blog/img.png&quot; alt=&quot;图片1&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;项目中点击Settings-&amp;gt;Pages选择页面启动运行的分支为master&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/blog/img_1.png&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;生成key,在全局设置中选 Settings-&amp;gt;Developer settings-&amp;gt;Person access tokens-&amp;gt;Generate new token 勾选 public_repo,在该页面最后&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;点击Generate token，复制已经生成的key&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/blog/img_2.png&quot; alt=&quot;图片3&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;进入博客项目中，选择Settings-&amp;gt;Secret-&amp;gt;Actions-&amp;gt;New repository secret,将上一步生成的key复制到value，最后点击Add secret&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/blog/img_3.png&quot; alt=&quot;图片4&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;添加gitalk.在全局设置中Settings-&amp;gt;Developer settings-&amp;gt;OAuth Apps.按格式填写后Register application.然后记下生成的Client ID和Client secrets&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/blog/img_4.png&quot; alt=&quot;图片4&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;修改_config.yml配置，基本的都配置好了主要是改一下项目基本配置和gitalk配置，另外删除_post下除template.md的文件和_wiki,_images下的所有文件&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;修改完成并推送或合并到master上就可以看到了。&lt;/p&gt;
 
 &lt;h3 id=&quot;写文章&quot;&gt;写文章&lt;/h3&gt;
 
 &lt;p&gt;以上主要是启动页面的步骤，但是最重要的还是文章的内容。写文章在_posts目录下写就可以了，可以按照template.md的格式写，其他的就没有什么要说的了。&lt;/p&gt;
+
 &lt;h2 id=&quot;本地调试&quot;&gt;本地调试&lt;/h2&gt;
 
 &lt;ol&gt;
