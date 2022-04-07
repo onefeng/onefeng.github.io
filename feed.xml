@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-04-06T22:13:56+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">解决/var/lib/docker/overlay2占用过大</title><link href="https://onefeng.github.io/2022/03/23/docker/" rel="alternate" type="text/html" title="解决/var/lib/docker/overlay2占用过大" /><published>2022-03-23T00:00:00+08:00</published><updated>2022-03-23T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/03/23/docker</id><content type="html" xml:base="https://onefeng.github.io/2022/03/23/docker/">&lt;p&gt;解决/var/lib/docker/overlay2占用过大&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-04-07T09:10:17+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">解决/var/lib/docker/overlay2占用过大</title><link href="https://onefeng.github.io/2022/03/23/docker/" rel="alternate" type="text/html" title="解决/var/lib/docker/overlay2占用过大" /><published>2022-03-23T00:00:00+08:00</published><updated>2022-03-23T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/03/23/docker</id><content type="html" xml:base="https://onefeng.github.io/2022/03/23/docker/">&lt;p&gt;解决/var/lib/docker/overlay2占用过大&lt;/p&gt;
 
 &lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
 &lt;p&gt;今天在公司的时候终于解决了一直困扰我很久的一个问题。&lt;/p&gt;
@@ -242,6 +242,9 @@ docker docker run &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span cla
 &lt;h2 id=&quot;本地调试&quot;&gt;本地调试&lt;/h2&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;在windows下&lt;/li&gt;
-  &lt;li&gt;linux下&lt;/li&gt;
+  &lt;li&gt;安装ruby&lt;/li&gt;
+  &lt;li&gt;安装 gem install bundler&lt;/li&gt;
+  &lt;li&gt;安装 gem install jekyll&lt;/li&gt;
+  &lt;li&gt;切换到项目目录下 bundle install&lt;/li&gt;
+  &lt;li&gt;bundle exec jekyll serve&lt;/li&gt;
 &lt;/ol&gt;</content><author><name>onefeng</name></author><category term="技术" /><summary type="html">关于使用github pages创建博客的教学</summary></entry></feed>
