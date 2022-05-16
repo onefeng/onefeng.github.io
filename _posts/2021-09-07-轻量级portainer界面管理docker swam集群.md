@@ -21,7 +21,7 @@ docker swarm init
 
 然后将输出，将你自己的复制出来
 ```shell
-docker swarm join --token SWMTKN-1-4oogo9qziq768dma0uh3j0z0m5twlm10iynvz7ixza96k6jh9p-ajkb6w7qd06y1e33yrgko64sk 192.168.0.102:2377
+docker swarm join --token SWMTKN-1-0h0sfcqboutezfxlnn19elpe1xm6k70tlwsr8iysainvq40dd8-4szq6qgvcveebry1mqsvnrwwr 192.168.0.102:2377
 ```
 
 2.在hs（worker节点）执行上一步复制的值
@@ -29,6 +29,10 @@ docker swarm join --token SWMTKN-1-4oogo9qziq768dma0uh3j0z0m5twlm10iynvz7ixza96k
 3.tp节点执行docker node ls
 
 ![](/images/posts/docker/img.png)
+
+4.使用docker swarm join-token worker添加worker
+
+![](/images/posts/docker/img_2.png)
 
 ## 使用portainer管理docker集群
 
