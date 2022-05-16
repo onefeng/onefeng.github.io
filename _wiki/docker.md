@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: docker常用命名
+title: docker常用命令
 categories: docker
 description: docker命令
 keywords: docker命令
