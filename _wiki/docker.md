@@ -8,6 +8,12 @@ keywords: docker命令
 
 ## 常用命令
 
+- 构建镜像
+
+```shell
+docker build -t test/app:1.0.0 .
+```
+
 - 推送镜像到dockerhub
 
 本地镜像为images:1.0
