@@ -14,7 +14,7 @@
     {
       "title"    : "关于",
       "url"      : "https://onefeng.github.io/about/",
-      "keywords" : "onefeng, 一风"
+      "keywords" : "onefeng, 晚风"
     } ,
   
   
@@ -40,6 +40,14 @@
   
   
     {
+      "title"    : "标签",
+      "url"      : "https://onefeng.github.io/tags/",
+      "keywords" : "标签"
+    } ,
+  
+  
+  
+    {
       "title"    : "维基",
       "url"      : "https://onefeng.github.io/wiki/",
       "keywords" : "维基, Wiki"
@@ -54,7 +62,43 @@
   
   
   
+  
+  
+  
+  
 
+  
+    {
+      "title"    : "jupyter开发环境搭建",
+      "category" : "技术",
+      
+      "url"      : "https://onefeng.github.io/2020/04/25/jupyter%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/",
+      "keywords" : "jupyter"
+    } ,
+  
+    {
+      "title"    : "排序算法",
+      "category" : "算法",
+      
+      "url"      : "https://onefeng.github.io/2020/04/27/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/",
+      "keywords" : "python,数据结构,算法"
+    } ,
+  
+    {
+      "title"    : "数据结构",
+      "category" : "算法",
+      
+      "url"      : "https://onefeng.github.io/2020/04/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/",
+      "keywords" : "数据结构,算法"
+    } ,
+  
+    {
+      "title"    : "装饰器使用",
+      "category" : "python",
+      
+      "url"      : "https://onefeng.github.io/2020/05/01/%E8%A3%85%E9%A5%B0%E5%99%A8%E4%BD%BF%E7%94%A8/",
+      "keywords" : "装饰器"
+    } ,
   
     {
       "title"    : "github pages创建博客",
@@ -65,8 +109,16 @@
     } ,
   
     {
+      "title"    : "轻量级portainer界面管理docker swarm集群",
+      "category" : "运维",
+      
+      "url"      : "https://onefeng.github.io/2021/09/07/%E8%BD%BB%E9%87%8F%E7%BA%A7portainer%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86docker-swam%E9%9B%86%E7%BE%A4/",
+      "keywords" : "运维"
+    } ,
+  
+    {
       "title"    : "ubuntu命令行连接wifi",
-      "category" : "linux",
+      "category" : "运维",
       
       "url"      : "https://onefeng.github.io/2021/09/26/linux-job/",
       "keywords" : "linux,运维"
@@ -74,10 +126,90 @@
   
     {
       "title"    : "安装ubuntu",
-      "category" : "linux",
+      "category" : "运维",
       
       "url"      : "https://onefeng.github.io/2021/09/29/linux1/",
       "keywords" : "linux,运维"
+    } ,
+  
+    {
+      "title"    : "python日志模块loguru使用",
+      "category" : "python",
+      
+      "url"      : "https://onefeng.github.io/2021/10/01/python%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97/",
+      "keywords" : "python,日志,loguru"
+    } ,
+  
+    {
+      "title"    : "python邮件消息通知模块notifiers使用",
+      "category" : "python",
+      
+      "url"      : "https://onefeng.github.io/2021/10/02/python%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5/",
+      "keywords" : "python,邮件,notifiers"
+    } ,
+  
+    {
+      "title"    : "linux用户权限管理",
+      "category" : "运维",
+      
+      "url"      : "https://onefeng.github.io/2021/10/05/linux%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/",
+      "keywords" : "linux,运维"
+    } ,
+  
+    {
+      "title"    : "python单例模式实现",
+      "category" : "python",
+      
+      "url"      : "https://onefeng.github.io/2021/10/22/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0/",
+      "keywords" : "python,设计模式,单例模式"
+    } ,
+  
+    {
+      "title"    : "工厂模式实现",
+      "category" : "python",
+      
+      "url"      : "https://onefeng.github.io/2021/10/23/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0/",
+      "keywords" : "python,设计模式,工厂模式"
+    } ,
+  
+    {
+      "title"    : "基于docker快速搭建开发环境",
+      "category" : "技术",
+      
+      "url"      : "https://onefeng.github.io/2021/10/25/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/",
+      "keywords" : "技术"
+    } ,
+  
+    {
+      "title"    : "PEP8 python编程规范",
+      "category" : "python",
+      
+      "url"      : "https://onefeng.github.io/2021/10/30/python%E7%9A%84pep8%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83/",
+      "keywords" : "python"
+    } ,
+  
+    {
+      "title"    : "canal部署及同步到es",
+      "category" : "技术",
+      
+      "url"      : "https://onefeng.github.io/2021/11/03/canal%E9%83%A8%E7%BD%B2%E5%8F%8A%E4%BD%BF%E7%94%A8/",
+      "keywords" : "docker,canal"
+    } ,
+  
+    {
+      "title"    : "flink集群的搭建",
+      "category" : "flink",
+      
+      "url"      : "https://onefeng.github.io/2021/12/12/flink%E9%9B%86%E7%BE%A4%E7%9A%84%E6%90%AD%E5%BB%BA/",
+      "keywords" : "flink"
+    } ,
+  
+    {
+      "title"    : "flink cdc同步数据",
+      "category" : "flink",
+      
+      "url"      : "https://onefeng.github.io/2021/12/26/flink-cdc%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE/",
+      "keywords" : "flink"
     } ,
   
     {
@@ -89,11 +221,35 @@
     } ,
   
     {
+      "title"    : "发布项目到pypi",
+      "category" : "python",
+      
+      "url"      : "https://onefeng.github.io/2022/05/21/%E5%8F%91%E5%B8%83%E9%A1%B9%E7%9B%AE%E5%88%B0pypi/",
+      "keywords" : "python,pypi"
+    } ,
+  
+    {
+      "title"    : "samba部署",
+      "category" : "运维",
+      
+      "url"      : "https://onefeng.github.io/2022/06/29/samba%E9%83%A8%E7%BD%B2/",
+      "keywords" : "samba"
+    } ,
+  
+    {
       "title"    : "cron表达式",
       "category" : "cron",
       
       "url"      : "https://onefeng.github.io/wiki/cron/",
       "keywords" : "cron相关说明"
+    } ,
+  
+    {
+      "title"    : "docker",
+      "category" : "docker",
+      
+      "url"      : "https://onefeng.github.io/wiki/docker/",
+      "keywords" : "docker命令"
     } ,
   
     {
@@ -110,6 +266,38 @@
       
       "url"      : "https://onefeng.github.io/wiki/github/",
       "keywords" : "gitHub"
+    } ,
+  
+    {
+      "title"    : "java",
+      "category" : "java",
+      
+      "url"      : "https://onefeng.github.io/wiki/java/",
+      "keywords" : "java"
+    } ,
+  
+    {
+      "title"    : "linux",
+      "category" : "linux",
+      
+      "url"      : "https://onefeng.github.io/wiki/linux/",
+      "keywords" : "linux"
+    } ,
+  
+    {
+      "title"    : "maven",
+      "category" : "maven",
+      
+      "url"      : "https://onefeng.github.io/wiki/maven/",
+      "keywords" : "maven"
+    } ,
+  
+    {
+      "title"    : "python",
+      "category" : "python",
+      
+      "url"      : "https://onefeng.github.io/wiki/python/",
+      "keywords" : "python"
     } 
   
 ]

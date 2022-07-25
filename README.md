@@ -17,13 +17,6 @@
 **[在线预览 &rarr;](https://onefeng.github.io)**
 
 
-## 使用文档
-
-- [本博客模板常见问题 Q & A](https://mazhuang.org/2020/05/03/blog-template-qna/)。
-
-- 在本地预览博客效果可以参考 [Setting up your Pages site locally with Jekyll][2]。
-
-
 ## 联系我
 
 如果对本博客模板或者内容有任何建议，可以通过 [Issues](https://github.com/onefeng/onefeng.github.io/issues) 与我取得联系。
