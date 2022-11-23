@@ -1,56 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-11-22T11:37:59+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">路由器连接网路</title><link href="https://onefeng.github.io/2022/07/02/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%89%A9%E5%B1%95/" rel="alternate" type="text/html" title="路由器连接网路" /><published>2022-07-02T00:00:00+08:00</published><updated>2022-07-02T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/07/02/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%89%A9%E5%B1%95</id><content type="html" xml:base="https://onefeng.github.io/2022/07/02/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%89%A9%E5%B1%95/">&lt;p&gt;两个路由器连接在同一网络步骤&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-11-23T09:40:36+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">路由器连接网路</title><link href="https://onefeng.github.io/2022/07/02/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%89%A9%E5%B1%95/" rel="alternate" type="text/html" title="路由器连接网路" /><published>2022-07-02T00:00:00+08:00</published><updated>2022-07-02T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/07/02/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%89%A9%E5%B1%95</id><content type="html" xml:base="https://onefeng.github.io/2022/07/02/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%89%A9%E5%B1%95/">&lt;p&gt;两个路由器连接在同一网络步骤&lt;/p&gt;
 
-&lt;p&gt;1.安装&lt;/p&gt;
+&lt;h2 id=&quot;前提条件&quot;&gt;前提条件&lt;/h2&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;samba samba-common
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;1.请先将其中一台路由器设置为连接宽带互联网接入，否则即使将两台路由器设置为同一局域网，也无法接入互联网。&lt;/p&gt;
 
-&lt;p&gt;2.添加用户&lt;/p&gt;
+&lt;p&gt;2.所有设置步骤都在第二个路由器中完成。只要您的第一台路由器可以访问互联网，第二台路由器也可以在完成相关设置步骤后访问互联网。&lt;/p&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adduser share
-passwd share
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;操作步骤&quot;&gt;操作步骤&lt;/h2&gt;
 
-&lt;p&gt;添加samba用户&lt;/p&gt;
+&lt;h3 id=&quot;连接电脑和路由器2&quot;&gt;连接电脑和路由器2&lt;/h3&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;smbpasswd &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; share
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;将第二台路由器插入电源，用网线将电脑连接到第二台路由器的局域网接口。
+如果是笔记本电脑，可以不用网线连接路由器，让笔记本电脑搜索连接路由器2的wifi信号，连接后也可以设置。
+两台无线路由器之间，暂时不要用网线连接。完成后续设置后，您可以使用网线进行连接。&lt;/p&gt;
 
-&lt;p&gt;3.设置共享的目录权限&lt;/p&gt;
+&lt;h3 id=&quot;设置路由器无线网络&quot;&gt;设置路由器无线网络&lt;/h3&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;sm
-&lt;span class=&quot;nb&quot;&gt;sudo chmod &lt;/span&gt;777 /home/share/sm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;登录第二台路由器的设置界面,然后找到“无线设置”或“WiFi设置”选项，首先为第二台路由器设置无线名称和密码。&lt;/p&gt;
 
-&lt;p&gt;4.配置samba&lt;/p&gt;
+&lt;h3 id=&quot;修改路由器2的ip地址&quot;&gt;修改路由器2的IP地址&lt;/h3&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vim /etc/samba/smb.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;在路由器2的设置页面，找到“局域网端口设置”或“局域网设置”选项，将路由器2的IP地址更改为与路由器1在同一网段。&lt;/p&gt;
 
-&lt;p&gt;在最后面添加配置&lt;/p&gt;
+&lt;p&gt;第一台路由器的IP地址为:192.168.1.1,因此，我将第二台路由器的IP地址更改为192.168.1.3.&lt;/p&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;share]
-comment &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; share folder
-browseable &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes
-&lt;/span&gt;path &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /home/share/sm
-create mask &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0755
-directory mask &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0755
-valid &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; share
-force user &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; share
-force group &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; share
-public &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes
-&lt;/span&gt;available &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes
-&lt;/span&gt;writable &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;重新登录到设置页面&quot;&gt;重新登录到设置页面&lt;/h3&gt;
 
-&lt;p&gt;5.重启samba&lt;/p&gt;
+&lt;p&gt;修改路由器2的IP地址后，路由器通常会重新启动。重启后，需要在浏览器中输入修改后的IP地址，才能重新打开路由器2的设置页面。&lt;/p&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; /etc/init.d/smbd restart
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;第三步中，把自己第二台路由器的IP地址改成了192.168.1.3。因此，现在我在浏览器中输入192.168.1.3，并再次登录到第二个路由器的设置页面。&lt;/p&gt;
 
-&lt;p&gt;6.使用&lt;/p&gt;
+&lt;h3 id=&quot;关闭dhcp服务器&quot;&gt;关闭DHCP服务器&lt;/h3&gt;
 
-&lt;p&gt;在windows下 win+R 输入 \hostname\share 打开 输入用户密码&lt;/p&gt;</content><author><name>onefeng</name></author><category term="运维" /><category term="路由器" /><summary type="html">两个路由器连接在同一网络步骤</summary></entry><entry><title type="html">samba部署</title><link href="https://onefeng.github.io/2022/06/29/samba%E9%83%A8%E7%BD%B2/" rel="alternate" type="text/html" title="samba部署" /><published>2022-06-29T00:00:00+08:00</published><updated>2022-06-29T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/06/29/samba%E9%83%A8%E7%BD%B2</id><content type="html" xml:base="https://onefeng.github.io/2022/06/29/samba%E9%83%A8%E7%BD%B2/">&lt;p&gt;samba主要用户windows与linux的文件共享，这里说明samba的部署&lt;/p&gt;
+&lt;p&gt;再次登录路由器2的设置页面，找到“DHCP服务器”选项并关闭。&lt;/p&gt;
+
+&lt;h3 id=&quot;连接两台路由器&quot;&gt;连接两台路由器&lt;/h3&gt;
+
+&lt;p&gt;完成前五步后，需要用网线连接两台无线路由器。&lt;/p&gt;
+
+&lt;p&gt;第一台路由器的局域网接口(LAN)连接到第二台路由器的局域网接口(LAN)&lt;/p&gt;
+
+&lt;p&gt;第二个无线路由器的WAN接口，不连接任何设备，保持空空闲状态。&lt;/p&gt;</content><author><name>onefeng</name></author><category term="运维" /><category term="路由器" /><summary type="html">两个路由器连接在同一网络步骤</summary></entry><entry><title type="html">samba部署</title><link href="https://onefeng.github.io/2022/06/29/samba%E9%83%A8%E7%BD%B2/" rel="alternate" type="text/html" title="samba部署" /><published>2022-06-29T00:00:00+08:00</published><updated>2022-06-29T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/06/29/samba%E9%83%A8%E7%BD%B2</id><content type="html" xml:base="https://onefeng.github.io/2022/06/29/samba%E9%83%A8%E7%BD%B2/">&lt;p&gt;samba主要用户windows与linux的文件共享，这里说明samba的部署&lt;/p&gt;
 
 &lt;p&gt;1.安装&lt;/p&gt;
 
