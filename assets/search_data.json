@@ -245,6 +245,14 @@
     } ,
   
     {
+      "title"    : "v2ray部署使用",
+      "category" : "运维",
+      
+      "url"      : "https://onefeng.github.io/2022/07/04/v2ray%E4%BD%BF%E7%94%A8/",
+      "keywords" : "科学上网"
+    } ,
+  
+    {
       "title"    : "cron表达式",
       "category" : "cron",
       
