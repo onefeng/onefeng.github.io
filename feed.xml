@@ -1,4 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-11-24T17:16:00+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">v2ray部署使用</title><link href="https://onefeng.github.io/2022/07/04/v2ray%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="v2ray部署使用" /><published>2022-07-04T00:00:00+08:00</published><updated>2022-07-04T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/07/04/v2ray%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="https://onefeng.github.io/2022/07/04/v2ray%E4%BD%BF%E7%94%A8/">&lt;p&gt;部署v2ray进行科学上网，并使用google 浏览器插件 SwitchyOmega进行科学上网。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-11-24T17:41:32+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">jellyfin部署</title><link href="https://onefeng.github.io/2022/07/04/jellyfin%E9%83%A8%E7%BD%B2/" rel="alternate" type="text/html" title="jellyfin部署" /><published>2022-07-04T00:00:00+08:00</published><updated>2022-07-04T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/07/04/jellyfin%E9%83%A8%E7%BD%B2</id><content type="html" xml:base="https://onefeng.github.io/2022/07/04/jellyfin%E9%83%A8%E7%BD%B2/">&lt;p&gt;部署jellyfin，搭建局域网家庭影院&lt;/p&gt;
+
+&lt;h2 id=&quot;简单部署&quot;&gt;简单部署&lt;/h2&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; jellyfin &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /root/share/电影/:/media &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 38096:8096 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;--restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+jellyfin/jellyfin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里将宿主机的”电影”目录挂载到容器中的/media目录。在浏览器中访问，ip:38096,进行初始化配置。&lt;/p&gt;
+
+&lt;h2 id=&quot;硬件优化&quot;&gt;硬件优化&lt;/h2&gt;
+
+&lt;p&gt;用硬件加速需要确认是否满足条件,输出结果有”renderD128”则硬件满足条件，在命令中加上”–device=/dev/dri/renderD128”&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; /dev/dri
+by-path  card0  renderD128
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;播放某些格式的视频会出现cpu占用过高，因此需要使用硬件加速。另外，我这里将电影的目录放在另一台服务器因此使用vieux/sshfs
+创建volume数据卷。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker volume create &lt;span class=&quot;nt&quot;&gt;--driver&lt;/span&gt; vieux/sshfs &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sshcmd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;root@192.168.1.9:/root/share/电影 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;xxxxx &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  sshvolume
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; jellyfin &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;--mount&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sshvolume,target&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/media&lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 38096:8096 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;--device&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/dri/renderD128 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;--restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+jellyfin/jellyfin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在界面中，选择”控制台”-“播放”,硬件加速栏选中”Video Acceleration API(VAAPI)&lt;/p&gt;</content><author><name>onefeng</name></author><category term="运维" /><category term="docker" /><summary type="html">部署jellyfin，搭建局域网家庭影院</summary></entry><entry><title type="html">v2ray部署使用</title><link href="https://onefeng.github.io/2022/07/04/v2ray%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="v2ray部署使用" /><published>2022-07-04T00:00:00+08:00</published><updated>2022-07-04T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/07/04/v2ray%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="https://onefeng.github.io/2022/07/04/v2ray%E4%BD%BF%E7%94%A8/">&lt;p&gt;部署v2ray进行科学上网，并使用google 浏览器插件 SwitchyOmega进行科学上网。&lt;/p&gt;
 
 &lt;h2 id=&quot;部署v2ray服务端&quot;&gt;部署v2ray服务端&lt;/h2&gt;
 
@@ -1425,93 +1463,4 @@ Optional plotz says to frobnicate the bizbaz first.
 
 &lt;span class=&quot;c1&quot;&gt;#更加不推荐的写法：
 &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;greeting&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>onefeng</name></author><category term="python" /><category term="python" /><summary type="html">本文主要介绍python的编程规范</summary></entry><entry><title type="html">基于docker快速搭建开发环境</title><link href="https://onefeng.github.io/2021/10/25/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" rel="alternate" type="text/html" title="基于docker快速搭建开发环境" /><published>2021-10-25T00:00:00+08:00</published><updated>2021-10-25T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/10/25/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83</id><content type="html" xml:base="https://onefeng.github.io/2021/10/25/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">&lt;p&gt;本文主要基于docker快速搭建开发环境，用于平时自己进行调试，实际项目环境需要由更专业的运维人员进行搭建。这里默认已经有了linux环境，或者是&lt;br /&gt;
-windows上安装了docker环境。在此基础 上创建docker容器。&lt;/p&gt;
-
-&lt;h3 id=&quot;docker安装&quot;&gt;docker安装&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;docker.io
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;修改docker源，在/etc/docker/daemon.json下写入&lt;/p&gt;
-&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;registry-mirrors&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://reg-mirror.qiniu.com/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;重启docker服务&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl daemon-reload
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart docker
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;安装Portainer，一个轻量级的docker管理工具&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 9000:9000 &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /var/run/docker.sock:/var/run/docker.sock &lt;span class=&quot;nt&quot;&gt;--restart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; portainer portainer/portainer-ce
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;参考&lt;a href=&quot;https://onefeng.xyz/2021/09/07/%E8%BD%BB%E9%87%8F%E7%BA%A7portainer%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86docker-swam%E9%9B%86%E7%BE%A4/&quot;&gt;用Portainer管理docker集群&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;安装ubuntu环境&quot;&gt;安装ubuntu环境&lt;/h3&gt;
-
-&lt;p&gt;首先给出Dockerfile&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:18.04
-
-ENV LANG C.UTF-8
-
-RUN  apt-get update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openssh-client &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openssh-server &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;vim &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-fs&lt;/span&gt; /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Asia/Shanghai&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /etc/timezone &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tzdata &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;root:123456&quot;&lt;/span&gt; | chpasswd  &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/PermitRootLogin prohibit-password/PermitRootLogin yes/'&lt;/span&gt; /etc/ssh/sshd_config &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'s/^#\(PermitRootLogin.*\)/\1/'&lt;/span&gt; /etc/ssh/sshd_config &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; /etc/init.d/ssh start &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;LANG=C.UTF-8&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; /etc/profile &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;export LANG&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; /etc/profile
-
-
-CMD &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/sbin/sshd&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;-D&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;在当前目录下构建镜像&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker build &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; ubuntu-dev:1.0 &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;运行容器&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; ubuntu-dev &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 10022:22 ubuntu-dev:1.0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;运行容器后可以通过ssh连接&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 10022 root@ip
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这里已经将镜像推送到dockerhub，直接拉取镜像运行&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; ubuntu-dev &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 10022:22 onefeng/ubuntu-dev:1.0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql环境&quot;&gt;mysql环境&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; mysql-dev &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 3306:3306 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;123456 &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; mysql:5.7
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id=&quot;redis环境&quot;&gt;redis环境&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;-itd&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; redis-dev &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 16379:6379 redis
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mongodb环境&quot;&gt;mongodb环境&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;-itd&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; mongo-dev &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 27017:27017 mongo
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;默认没有密码&lt;/p&gt;
-&lt;h3 id=&quot;es-kibana环境&quot;&gt;es kibana环境&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; elasticsearch &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 9200:9200 &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 9300:9300 &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;discovery.type=single-node&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ES_JAVA_OPTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-Xms512m -Xmx1024m&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; elasticsearch:7.10.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;访问ip:9200，启动es时最小内存512，最大内存1024&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; kibana &lt;span class=&quot;nt&quot;&gt;--link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;elasticsearch:es  &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 5601:5601 &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; kibana:7.10.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;通过link参数连接到es容器名称，访问ip:5601&lt;br /&gt;
-参数解释&lt;br /&gt;
-–link &lt;name or=&quot;&quot;&gt;:alias\
-alias为容器别名&lt;/name&gt;&lt;/p&gt;
-&lt;h3 id=&quot;rabbitmq环境&quot;&gt;rabbitmq环境&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 15672:15672  &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;  5672:5672  &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RABBITMQ_DEFAULT_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;admin &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RABBITMQ_DEFAULT_PASS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;admin &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; rabbitmq rabbitmq:3-management
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;访问ip:15672 用户名/密码 admin/admin&lt;/p&gt;</content><author><name>onefeng</name></author><category term="技术" /><category term="docker" /><summary type="html">本文主要基于docker快速搭建开发环境，用于平时自己进行调试，实际项目环境需要由更专业的运维人员进行搭建。这里默认已经有了linux环境，或者是 windows上安装了docker环境。在此基础 上创建docker容器。</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>onefeng</name></author><category term="python" /><category term="python" /><summary type="html">本文主要介绍python的编程规范</summary></entry></feed>
