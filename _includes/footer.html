@@ -75,7 +75,11 @@
                 $(this).wrapAll(strA);
             });
 
-            $('[data-fancybox="gallery"]').fancybox();
+
+        $('[data-fancybox="gallery"]').fancybox({
+                                  openEffect    : 'elastic',
+                                  closeEffect   : 'elastic',
+                              });
         });
     </script>
 
