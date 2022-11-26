@@ -277,6 +277,14 @@
     } ,
   
     {
+      "title"    : "邮件服务器的搭建与使用",
+      "category" : "运维",
+      
+      "url"      : "https://onefeng.github.io/2022/08/26/%E6%90%AD%E5%BB%BA%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/",
+      "keywords" : "gitlab"
+    } ,
+  
+    {
       "title"    : "cron表达式",
       "category" : "cron",
       
