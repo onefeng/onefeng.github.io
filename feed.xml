@@ -1,4 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-11-26T09:57:56+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">frps内网穿透</title><link href="https://onefeng.github.io/2022/07/05/frps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="alternate" type="text/html" title="frps内网穿透" /><published>2022-07-05T00:00:00+08:00</published><updated>2022-07-05T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/07/05/frps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F</id><content type="html" xml:base="https://onefeng.github.io/2022/07/05/frps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">&lt;p&gt;介绍frps内网穿透的部署以及使用&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://onefeng.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://onefeng.github.io/" rel="alternate" type="text/html" /><updated>2022-11-26T16:17:47+08:00</updated><id>https://onefeng.github.io/feed.xml</id><title type="html">晚风</title><subtitle>晚风的个人博客</subtitle><author><name>onefeng</name></author><entry><title type="html">gitlab安装使用</title><link href="https://onefeng.github.io/2022/08/22/gitlab%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="gitlab安装使用" /><published>2022-08-22T00:00:00+08:00</published><updated>2022-08-22T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/08/22/gitlab%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="https://onefeng.github.io/2022/08/22/gitlab%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/">&lt;p&gt;介绍gitlab在内网中安装使用。&lt;/p&gt;
+
+&lt;h2 id=&quot;安装&quot;&gt;安装&lt;/h2&gt;
+
+&lt;p&gt;这里采用docker方式一键部署&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--detach&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--hostname&lt;/span&gt; 192.168.1.8 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--publish&lt;/span&gt; 192.168.1.8:12443:443 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--publish&lt;/span&gt; 192.168.1.8:12080:80 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--publish&lt;/span&gt; 192.168.1.8:12022:22 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; gitlab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--restart&lt;/span&gt; always &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; /opt/docker/gitlab/config:/etc/gitlab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; /opt/docker/gitlab/logs:/var/log/gitlab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; /opt/docker/gitlab/data:/var/opt/gitlab &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--shm-size&lt;/span&gt; 256m &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  gitlab/gitlab-ce:latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中把192.168.1.8替换成自己的内网ip或域名&lt;/p&gt;
+
+&lt;h2 id=&quot;修改配置&quot;&gt;修改配置&lt;/h2&gt;
+
+&lt;p&gt;编辑 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim /opt/docker/gitlab/config/gitlab.rb&lt;/code&gt; 在文件最后添加，gitlab_ssh_host，gitlab_shell_ssh_port为项目ssh协议的地址及端口，
+其他配置为邮箱基本配置没有可以不配置。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'gitlab_ssh_host'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'192.168.1.8'&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'gitlab_shell_ssh_port'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 12022
+
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'gitlab_email_enabled'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true
+&lt;/span&gt;gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'gitlab_email_from'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'admin@onefeng.xyz'&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'gitlab_email_display_name'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'admin'&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'gitlab_email_reply_to'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'admin@onefeng.xyz'&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'gitlab_email_subject_suffix'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;
+
+
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_enable'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true
+&lt;/span&gt;gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_address'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;smtp.onefeng.xyz&quot;&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_port'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 25
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_user_name'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;admin@onefeng.xyz&quot;&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_password'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;xxxx&quot;&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_domain'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;onefeng.xyz&quot;&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_authentication'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;login&quot;&lt;/span&gt;
+gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_enable_starttls_auto'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;false
+&lt;/span&gt;gitlab_rails[&lt;span class=&quot;s1&quot;&gt;'smtp_tls'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;查看初始密码&quot;&gt;查看初始密码&lt;/h2&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /opt/docker/gitlab/config/initial_root_password
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;访问http://192.168.1.8:12080登录 用户root,密码使用查询出来的值，进入界面后进行重新修改密码&lt;/p&gt;
+
+&lt;h2 id=&quot;配置界面&quot;&gt;配置界面&lt;/h2&gt;
+
+&lt;p&gt;使用的时候，发现clone with http时端口没有改为12022，这时需要配置一下界面，使用root账号找到 “Admin Area” &amp;gt; “Settings” &amp;gt; “General” &amp;gt; “Visibility and access controls” &amp;gt; “Custom Git clone URL for HTTP(S)”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/runing/img.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>onefeng</name></author><category term="运维" /><category term="docker" /><summary type="html">介绍gitlab在内网中安装使用。</summary></entry><entry><title type="html">frps内网穿透</title><link href="https://onefeng.github.io/2022/07/05/frps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="alternate" type="text/html" title="frps内网穿透" /><published>2022-07-05T00:00:00+08:00</published><updated>2022-07-05T00:00:00+08:00</updated><id>https://onefeng.github.io/2022/07/05/frps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F</id><content type="html" xml:base="https://onefeng.github.io/2022/07/05/frps%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">&lt;p&gt;介绍frps内网穿透的部署以及使用&lt;/p&gt;
 
 &lt;h2 id=&quot;服务端部署&quot;&gt;服务端部署&lt;/h2&gt;
 
@@ -847,274 +906,4 @@ scp &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; /home/release_env/flink-1.1
 
 &lt;p&gt;部署stack&lt;/p&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker  stack deploy  &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; ./docker-stack.yml &lt;span class=&quot;nt&quot;&gt;--prune&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--resolve-image&lt;/span&gt; always  flink-service
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>onefeng</name></author><category term="flink" /><category term="flink" /><summary type="html">flink集群的搭建</summary></entry><entry><title type="html">canal部署及同步到es</title><link href="https://onefeng.github.io/2021/11/03/canal%E9%83%A8%E7%BD%B2%E5%8F%8A%E4%BD%BF%E7%94%A8/" rel="alternate" type="text/html" title="canal部署及同步到es" /><published>2021-11-03T00:00:00+08:00</published><updated>2021-11-03T00:00:00+08:00</updated><id>https://onefeng.github.io/2021/11/03/canal%E9%83%A8%E7%BD%B2%E5%8F%8A%E4%BD%BF%E7%94%A8</id><content type="html" xml:base="https://onefeng.github.io/2021/11/03/canal%E9%83%A8%E7%BD%B2%E5%8F%8A%E4%BD%BF%E7%94%A8/">&lt;p&gt;本文主要是说明canal的部署和同步数据到es中&lt;/p&gt;
-
-&lt;h2 id=&quot;环境准备&quot;&gt;环境准备&lt;/h2&gt;
-
-&lt;p&gt;这里需要将环境部署成以下的版本&lt;/p&gt;
-
-&lt;p&gt;版本&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;canal-server 1.1.15&lt;/li&gt;
-  &lt;li&gt;canal-adapter 1.1.15&lt;/li&gt;
-  &lt;li&gt;mysql 5.7&lt;/li&gt;
-  &lt;li&gt;es 7.10.1&lt;/li&gt;
-  &lt;li&gt;kibana 7.10.1&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;开启mysql binlog，这里自行搜索一下怎么修改mysql配置&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;show variables like &lt;span class=&quot;s1&quot;&gt;'log_bin'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;显示log_bin的值为ON则已经开启&lt;/p&gt;
-
-&lt;p&gt;建从库权限的账号参考语句&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE USER canal IDENTIFIED BY &lt;span class=&quot;s1&quot;&gt;'123456'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
-GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; TO &lt;span class=&quot;s1&quot;&gt;'canal'&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;'%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-FLUSH PRIVILEGES&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;创建库/表&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE DATABASE gordon_db CHARACTER SET &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; utf8 COLLATE &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; utf8_unicode_ci&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-use gordon_db&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-CREATE TABLE &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dw_dim_mohurd_apt&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; int&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;10&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;,
-  &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;certno&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; varchar&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;32&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;,
-  &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;name&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; varchar&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;128&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;在kibana Dev Tools中执行&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PUT mohurd_apt
-&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;s2&quot;&gt;&quot;mappings&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;s2&quot;&gt;&quot;properties&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;s2&quot;&gt;&quot;certno&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;text&quot;&lt;/span&gt;,
-          &lt;span class=&quot;s2&quot;&gt;&quot;fields&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;s2&quot;&gt;&quot;keyword&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-              &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;keyword&quot;&lt;/span&gt;,
-              &lt;span class=&quot;s2&quot;&gt;&quot;ignore_above&quot;&lt;/span&gt; : 256
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-          &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
-        &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;long&quot;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
-        &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;text&quot;&lt;/span&gt;,
-          &lt;span class=&quot;s2&quot;&gt;&quot;fields&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;s2&quot;&gt;&quot;keyword&quot;&lt;/span&gt; : &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-              &lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt; : &lt;span class=&quot;s2&quot;&gt;&quot;keyword&quot;&lt;/span&gt;,
-              &lt;span class=&quot;s2&quot;&gt;&quot;ignore_above&quot;&lt;/span&gt; : 256
-            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-          &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;安装&quot;&gt;安装&lt;/h2&gt;
-
-&lt;h3 id=&quot;canal-server&quot;&gt;canal-server&lt;/h3&gt;
-
-&lt;p&gt;依次执行以下命令下载，解压和修改配置文件&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://hub.fastgit.org/alibaba/canal/releases/download/canal-1.1.5/canal.deployer-1.1.5.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; canal.deployer-1.1.5.tar.gz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; /app/canal-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /app/canal-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;修改conf/example/instance.properties&lt;/p&gt;
-
-&lt;div class=&quot;language-properties highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#################################################
-## mysql serverId , v1.0.26+ will autoGen
-# canal.instance.mysql.slaveId=0
-&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# enable gtid use true/false
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.instance.gtidon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# position info
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.instance.master.address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;192.168.11.60:3306  #修改数据库ip端口&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;canal.instance.master.journal.name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;canal.instance.master.position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;canal.instance.master.timestamp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;canal.instance.master.gtid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# rds oss binlog
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.instance.rds.accesskey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;canal.instance.rds.secretkey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;canal.instance.rds.instanceId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# table meta tsdb info
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.instance.tsdb.enable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#canal.instance.tsdb.url=jdbc:mysql://127.0.0.1:3306/canal_tsdb
-#canal.instance.tsdb.dbUsername=canal
-#canal.instance.tsdb.dbPassword=canal
-&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#canal.instance.standby.address =
-#canal.instance.standby.journal.name =
-#canal.instance.standby.position =
-#canal.instance.standby.timestamp =
-#canal.instance.standby.gtid=
-&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# username/password
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.instance.dbUsername&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;canal&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;canal.instance.dbPassword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;123456&lt;/span&gt;
-&lt;span class=&quot;py&quot;&gt;canal.instance.connectionCharset&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;UTF-8&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# enable druid Decrypt database password
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.instance.enableDruid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;false&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#canal.instance.pwdPublicKey=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALK4BUxdDltRRE5/zXpVEVPUgunvscYFtEip3pmLlhrWpacX7y7GCMo2/JM6LeHmiiNdH1FWgGCpUfircSwlWKUCAwEAAQ==
-&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# table regex
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.instance.filter.regex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;..*&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# table black regex
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.instance.filter.black.regex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.slave_.*&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# table field filter(format: schema1.tableName1:field1/field2,schema2.tableName2:field1/field2)
-#canal.instance.filter.field=test1.t_product:id/subject/keywords,test2.t_company:id/name/contact/ch
-# table field black filter(format: schema1.tableName1:field1/field2,schema2.tableName2:field1/field2)
-#canal.instance.filter.black.field=test1.t_product:subject/product_image,test2.t_company:id/name/contact/ch
-&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# mq config
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.mq.topic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;example&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# dynamic topic route by schema or table regex
-#canal.mq.dynamicTopic=mytest1.user,mytest2\\..*,.*\\..*
-&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;canal.mq.partition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# hash partition config
-#canal.mq.partitionsNum=3
-#canal.mq.partitionHash=test.table:id^name,.*\\..*
-#canal.mq.dynamicTopicPartitionNum=test.*:4,mycanal:6
-#################################################
-&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;启动canal-server&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sh bin/startup.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;canal-adapter&quot;&gt;canal-adapter&lt;/h3&gt;
-
-&lt;p&gt;依次运行下面命令&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://hub.fastgit.org/alibaba/canal/releases/download/canal-1.1.5/canal.adapter-1.1.5.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxvf&lt;/span&gt; canal.adapter-1.1.5.tar.gz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; /app/canal-adapter
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /app/canal-adapter
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;修改配置conf/application.yml&lt;/p&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8081&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;spring&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;jackson&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;date-format&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yyyy-MM-dd HH:mm:ss&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;time-zone&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;GMT+8&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;default-property-inclusion&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;non_null&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;canal.conf&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tcp&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#tcp kafka rocketMQ rabbitMQ&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;flatMessage&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;zookeeperHosts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;syncBatchSize&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;retries&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;accessKey&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;secretKey&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;consumerProperties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# canal tcp consumer&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;canal.tcp.server.host&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;192.168.11.30:11111&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;canal.tcp.zookeeper.hosts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;canal.tcp.batch.size&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;canal.tcp.username&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;canal.tcp.password&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# kafka consumer&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;kafka.bootstrap.servers&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;127.0.0.1:9092&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;kafka.enable.auto.commit&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;kafka.auto.commit.interval.ms&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;kafka.auto.offset.reset&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;latest&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;kafka.request.timeout.ms&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;40000&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;kafka.session.timeout.ms&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30000&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;kafka.isolation.level&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read_committed&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;kafka.max.poll.records&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# rocketMQ consumer&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rocketmq.namespace&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rocketmq.namesrv.addr&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;127.0.0.1:9876&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rocketmq.batch.size&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rocketmq.enable.message.trace&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rocketmq.customized.trace.topic&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rocketmq.access.channel&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rocketmq.subscribe.filter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# rabbitMQ consumer&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rabbitmq.host&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rabbitmq.virtual.host&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rabbitmq.username&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rabbitmq.password&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;rabbitmq.resource.ownerId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;#  srcDataSources:&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#    defaultDS:&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#      url: jdbc:mysql://127.0.0.1:3306/mytest?useUnicode=true&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#      username: root&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#      password: 121212&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;srcDataSources&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;defaultDS&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jdbc:mysql://192.168.11.60:3306/comp?useUnicode=true&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;canal&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;123456&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;maxActive&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;canalAdapters&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;example&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# canal instance Name or mq topic name&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;groups&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;groupId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;g1&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;outerAdapters&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;es7&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;eskey&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#这里是全量导入时的taskid&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;hosts&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;192.168.11.73:9200&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rest&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# restful 模式&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;cluster.name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;elasticsearch-cluster&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 集群名字&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;修改 conf/es7/mohurd_apt.yml&lt;/p&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;dataSourceKey&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;defaultDS&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#和上面canal.conf.srcDataSources.defaultDS要一样&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;outerAdapterKey&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;eskey&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#和上面canal.conf.canalAdapters.instance.groups.outerAdapters.key要一样&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;destination&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;example&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#和上面canal.conf.canalAdapters.instance要一样&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;groupId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;g1&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;esMapping&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;_index&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mohurd_apt&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#索引名称&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;_id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;_id&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;as&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;_id,id,certno,name&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;dw_dim_mohurd_apt&lt;/span&gt;
-       &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 查询的sql返回的结构和es的filed对应&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;commitBatch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3000&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;启动 /bin/startup.sh&lt;/p&gt;
-
-&lt;p&gt;全量同步&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl http://192.168.10.69:8081/etl/es7/eskey/mohurd_apt.yml &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; POST
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;使用docker部署canal-servercanal-adapter&quot;&gt;使用docker部署canal-server,canal-adapter&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; canal-server &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 11111:11111 &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; 1024m
-&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/docker/canal-server/conf:/home/admin/canal-server/conf
-&lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/docker/canal-server/logs:/home/admin/canal-server/logs
-&lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; canal/canal-server:v1.1.5
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; canal-adapter &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 8081:8081 &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/docker/canal-adapter/conf:/opt/canal-adapter/conf &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; /opt/docker/canal-adapter/logs:/opt/canal-adapter/logs  &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; slpcat/canal-adapter:v1.1.5
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;然后对应修改宿主文件下的conf。&lt;/p&gt;</content><author><name>onefeng</name></author><category term="技术" /><category term="canal" /><category term="es" /><summary type="html">本文主要是说明canal的部署和同步数据到es中</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>onefeng</name></author><category term="flink" /><category term="flink" /><summary type="html">flink集群的搭建</summary></entry></feed>

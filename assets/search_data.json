@@ -269,6 +269,14 @@
     } ,
   
     {
+      "title"    : "gitlab安装使用",
+      "category" : "运维",
+      
+      "url"      : "https://onefeng.github.io/2022/08/22/gitlab%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/",
+      "keywords" : "gitlab"
+    } ,
+  
+    {
       "title"    : "cron表达式",
       "category" : "cron",
       
