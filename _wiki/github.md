@@ -36,3 +36,17 @@ keywords: gitHub
    git config --unset https.proxy
    ```
    
+   全局设置代理
+
+   ```shell
+   git config --global http.proxy "socks5://192.168.1.8:30000"
+   git config --global https.proxy "socks5://192.168.1.8:30000"
+   ```
+
+   取消代理
+
+   ```shell
+   git config --unset http.proxy
+   git config --unset https.proxy
+   ```
+   
