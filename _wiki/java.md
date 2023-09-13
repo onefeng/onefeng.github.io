@@ -24,3 +24,10 @@ keywords: java
 sudo apt-get install openjdk-8-jdk
 ```
 
+### 常见问题
+
+1. 用lombok的@data注解后，IDEA报红，但程序正常
+
+这是因为IDEA没有安装（更新）lombok插件，解决方法：
+
+在IDEA安装lombok插件 点击file的settings >> plugins 搜索 lombok然后安装.
