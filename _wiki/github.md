@@ -1,9 +1,9 @@
 ---
 layout: wiki
-title: gitHub
-categories: gitHub
-description: gitHub 相关使用技巧
-keywords: gitHub
+title: github
+categories: github
+description: github 相关使用技巧
+keywords: github
 ---
 
 ## 打开/下载文件加速

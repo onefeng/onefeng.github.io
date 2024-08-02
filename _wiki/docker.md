@@ -25,3 +25,22 @@ REPOSITORY=username/$IMAGE_NAME
 docker tag $IMAGE_NAME $REPOSITORY
 docker push $REPOSITORY
 ```
+
+
+- 设置docker代理地址
+
+```shell
+# 创建目录
+mkdir -p /etc/systemd/system/docker.service.d
+
+# 编辑配置文件
+vim /etc/systemd/system/docker.service.d/http-proxy.conf
+
+# 添加以下内容
+[Service]
+Environment="HTTP_PROXY=http://10.0.100.86:30001"
+Environment="HTTPS_PROXY=http://10.0.100.86:30001"
+# 重新加载配置
+systemctl daemon-reload
+systemctl restart docker
+```
