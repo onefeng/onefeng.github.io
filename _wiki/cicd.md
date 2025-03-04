@@ -17,7 +17,7 @@ keywords: CICD
 
 基本jenkins+docker持续集成和持续部署，基于github项目触发自动构建和部署。
 
-1.使用docker安装jenkins ，并使用宿主机的docker，保证宿主机docker已登录dockerhub
+1.使用docker安装jenkins ，并使用宿主机的docker，保证宿主机docker已登录dockerhub，容器内也登录dockerhub。
 
 ```shell
 docker run -d \
@@ -26,8 +26,7 @@ docker run -d \
 -v /usr/bin/docker:/usr/bin/docker -p 8080:8080 \
 -e TZ=Asia/Shanghai \
 -e LANG=C.UTF-8 \
--e LANGUAGE=zh_CN.UTF-8 \
--e LC_ALL=zh_CN.UTF-8 \
+-e LC_ALL=C.UTF-8 \
 -p 50000:50000   --name jenkins --user root   jenkins/jenkins:lts
 ```
 
